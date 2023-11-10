@@ -12,5 +12,6 @@ edition = "2021"
 license = "BSD-2-Clause"
 
 [dependencies]
-sel4 = { git = "https://github.com/seL4/rust-sel4" }
-sel4-root-task = { git = "https://github.com/seL4/rust-sel4" }
+sel4 = { path = "../../../rust-sel4/crates/sel4" }
+sel4-root-task = { path = "../../../rust-sel4/crates/sel4-root-task" }
+sel4-logging = { path = "../../../rust-sel4/crates/sel4-logging" }
