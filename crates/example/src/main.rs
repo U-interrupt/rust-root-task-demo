@@ -8,11 +8,21 @@
 #![no_main]
 #![feature(never_type)]
 
+use sel4_logging::{LevelFilter, Logger, LoggerBuilder};
+use sel4_root_task::debug_print;
 use sel4_root_task::root_task;
+
+const LOG_LEVEL: LevelFilter = LevelFilter::Trace;
+
+static LOGGER: Logger = LoggerBuilder::const_default()
+    .level_filter(LOG_LEVEL)
+    .write(|s| debug_print!("{}", s))
+    .build();
 
 #[root_task]
 fn main(bootinfo: &sel4::BootInfo) -> sel4::Result<!> {
     sel4::debug_println!("Hello, World!");
+    LOGGER.set().unwrap();
 
     let blueprint = sel4::ObjectBlueprint::Notification;
 
